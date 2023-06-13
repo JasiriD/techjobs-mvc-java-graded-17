@@ -11,8 +11,42 @@
   <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
 
   <!-- TODO #1 - Use a loop to display job results in a table. -->
+  <!--Using th:each to iterate through jobs. We also add the job-listing CSS class here, as well ass
+    creating a table for all job listings-->
+  <table class="job-listing" th:each="job : ${jobs}">
+    <!--Creating table rows with <tr> while making "columns" with <td>
+     First I put the name of the parameter, then I input each indivisual object value
+     from our current job in ${jobs}-->
+    <tr>
+        <td>ID</td>
+        <td th:text="${job.id}"></td>
+    </tr>
+    <tr>
+        <td>Name</td>
+        <td th:text="${job.name}"></td>
+    </tr>
+    <tr>
+        <td>Employer</td>
+        <td th:text="${job.employer.value}"></td>
+    </tr>
+    <tr>
+        <td>Location</td>
+        <td th:text="${job.location.value}"></td>
+    </tr>
+    <tr>
+        <td>Position Type</td>
+        <td th:text="${job.positionType.value}"></td>
+    </tr>
+    <tr>
+        <td>Skill</td>
+        <td th:text="${job.coreCompetency.value}"></td>
+    </tr>
 
+
+  </table>
 </div>
 
 </body>
 </html>
+
+<!-- copy pasted from list-jobs.html. I needed to do something different to display the text in the first cell properly. -->
