@@ -38,11 +38,15 @@ public class SearchController {
         model.addAttribute("columns", columnChoices);
         ArrayList<Job> jobs;
         //if user enters all or leaves box empty, call findall,
-        if (searchType.equals("all") || (searchType.isEmpty())){
+        if (searchType.equals("all") && searchTerm.isEmpty() || (searchType.isEmpty()) && searchTerm.isEmpty()){
             jobs = JobData.findAll();
             //Adding this to output as I interperet
-            model.addAttribute("title", "Jobs With All: "+ searchTerm);
-        } else {
+            model.addAttribute("title", "All Jobs: ");
+        } else if (searchType.equals("all") || (searchType.isEmpty())){
+            jobs = JobData.findByValue(searchTerm);
+            model.addAttribute("title", "All Jobs With: "+ searchTerm);
+        }
+        else {
             jobs = JobData.findByColumnAndValue(searchType, searchTerm);
             model.addAttribute("title", "Jobs with " + searchType + ": " + searchTerm);
         }
